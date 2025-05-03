@@ -2,8 +2,10 @@
 
 export function Home() {
     return (
-        <h1>
-            Pagina home
-        </h1>
+        <div className="w-full h-screen bg-neutral-900">
+            <h1 className="text-white text-2xl">
+                Pagina home
+            </h1>
+        </div>
     )
 }
