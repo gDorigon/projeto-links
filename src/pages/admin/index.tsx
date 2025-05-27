@@ -1,10 +1,18 @@
 import { Header } from "../../components/header";
 import { Input } from "../../components/Input";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect } from "react";
 import { FiTrash } from "react-icons/fi";
 import { db } from "../../services/firebaseConnection";
 import { addDoc, collection, onSnapshot, query, orderBy, doc, deleteDoc } from "firebase/firestore";
 
+
+interface LinkProps {
+    id: string,
+    name: string,
+    url: string,
+    bg: string,
+    color: string
+}
 
 export function Admin() {
 
@@ -12,6 +20,34 @@ export function Admin() {
     const [urlInput, setUrlInput] = useState("")
     const [textColorInput, setTextColorInput] = useState("#000")
     const [backgroundColorInput, setBackgroundColorInput] = useState("#f2f2f2")
+
+    const [links, setLinks] = useState<LinkProps>([])
+
+    useEffect(() => {
+        const linksRef = collection(db, "links")
+        const queryRef = query(linksRef, orderBy("created", "asc"))
+
+        const unsub = onSnapshot(queryRef, (snapshot) => {
+            let lista = [] as LinkProps[];
+
+            snapshot.forEach((doc) => {
+                lista.push({
+                    id: doc.id,
+                    name: doc.data().name,
+                    url: doc.data().url,
+                    bg: doc.data().bg,
+                    color: doc.data().color
+                })
+            })
+
+            setLinks(lista)
+        })
+
+        return (() => {
+            unsub();
+        })
+
+    }, [])
 
     function handleRegister(e: FormEvent) {
         e.preventDefault();
