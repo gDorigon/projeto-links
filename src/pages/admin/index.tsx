@@ -76,6 +76,13 @@ export function Admin() {
 
     }
 
+    async function handleDeletLink(id: string) {
+        const docRef = doc(db, "links", id)
+
+        await deleteDoc(docRef)
+
+    }
+
 
 
     return (
@@ -148,19 +155,23 @@ export function Admin() {
             </h2>
 
 
-            <article
-                className="flex items-center justify-between w-11/12 max-w-xl rounded py-3 px-2 mb-2 select-none"
-                style={{ backgroundColor: "#2563eb", color: "#FFF" }}
-            >
-                <p>Canal do youtube</p>
-                <div>
-                    <button
-                        className="border border-dashed p-1 rounded bg-neutral-900"
-                    >
-                        <FiTrash size={18} color="#FFF" />
-                    </button>
-                </div>
-            </article>
+            {links.map((link) => (
+                <article
+                    key={link.id}
+                    className="flex items-center justify-between w-11/12 max-w-xl rounded py-3 px-2 mb-2 select-none"
+                    style={{ backgroundColor: link.bg, color: link.color }}
+                >
+                    <p>{link.name}</p>
+                    <div>
+                        <button
+                            className="border border-dashed p-1 rounded bg-neutral-900"
+                            onClick={() => handleDeletLink(link.id)}
+                        >
+                            <FiTrash size={18} color="#FFF" />
+                        </button>
+                    </div>
+                </article>
+            ))}
         </div>
     )
 }
