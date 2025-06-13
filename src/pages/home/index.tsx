@@ -1,6 +1,6 @@
 import { Social } from "../../components/Social"
 
-import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa"
+import { FaFacebook, FaGithub, FaInstagram } from "react-icons/fa"
 
 import { useEffect, useState } from "react"
 
@@ -101,12 +101,13 @@ export function Home() {
                         </Social>
 
                         <Social url={socialLinks.instagram}>
-                            <FaYoutube size={35} color="#FFF" />
-                        </Social>
-
-                        <Social url={socialLinks.instagram}>
                             <FaInstagram size={35} color="#FFF" />
                         </Social>
+
+                        <Social url={socialLinks.github}>
+                            <FaGithub size={35} color="#FFF" />
+                        </Social>
+
                     </footer>
                 )}
             </main>

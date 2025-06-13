@@ -4,6 +4,7 @@ import { Networks } from './pages/networks'
 import { Admin } from './pages/admin'
 import { Login } from './pages/login'
 import { Private } from './routes/Private'
+import { ErrorPage } from './pages/error'
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />
+  },
+  {
+    path: "*",
+    element: <ErrorPage />
   }
 ])
 

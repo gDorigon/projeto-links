@@ -4,7 +4,6 @@ import { FormEvent, useEffect, useState } from "react";
 import { db } from "../../services/firebaseConnection";
 
 import {
-    addDoc,
     setDoc,
     doc,
     getDoc
